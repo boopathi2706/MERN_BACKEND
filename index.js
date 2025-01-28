@@ -43,6 +43,25 @@ app.get('/getssignupdet',async (req,res)=>{
     var signUpdet=await Signup.find();
     res.status(200).json(signUpdet);
 })
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await Signup.findOne({ email });
+    if (!user) {
+      return res.status(404).send("User not found!");
+    }
+
+    if (user.password !== password) {
+      return res.status(401).send("Invalid credentials!");
+    }
+    res.status(200).send("Login successful!");
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).send("Error during login");
+  }
+});
+
 
 app.listen(3001, () => {
   console.log("My Server Started");

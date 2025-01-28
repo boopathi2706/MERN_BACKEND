@@ -1,4 +1,5 @@
 const mdb = require("mongoose");
+
 const signupSchema = mdb.Schema({
   firstname: String,
   lastname: String,
@@ -8,3 +9,5 @@ const signupSchema = mdb.Schema({
 
 const Signup_schema = mdb.model("signup", signupSchema);
 module.exports = Signup_schema;
+
+
